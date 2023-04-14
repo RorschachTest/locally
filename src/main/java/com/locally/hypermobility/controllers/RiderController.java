@@ -5,10 +5,10 @@ import com.locally.hypermobility.models.BookingRequest;
 import com.locally.hypermobility.models.CabDetails;
 import com.locally.hypermobility.services.CabFinderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,9 +21,8 @@ public class RiderController {
     private final SimpMessagingTemplate simpMessagingTemplate;
 
     @MessageMapping("/message")
-    public void bookACab(
-            @Header("simpSessionId") String sessionId,
-            @Payload BookingRequest bookingRequest) {
+    @SendToUser("queue/greeting")
+    public BookingDetails bookACab(@Payload BookingRequest bookingRequest) {
         cabFinderService.bookCabForRider(bookingRequest.getRiderId(), bookingRequest.getPickupLocation(),
                 bookingRequest.getDropLocation());
 
@@ -33,8 +32,7 @@ public class RiderController {
                                 .build()
                 )
                 .build();
-
-        simpMessagingTemplate.convertAndSend("/queue/greeting-" + sessionId, bookingDetails);
+        return bookingDetails;
     }
 
 }

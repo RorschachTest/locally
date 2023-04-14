@@ -19,7 +19,7 @@ function connect() {
         setConnected(true);
         var sessionId = /\/([^\/]+)\/websocket/.exec(socket._transport.url)[1];
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/queue/greeting-'+sessionId, function (bookingDetails) {
+        stompClient.subscribe('/user/queue/greeting', function (bookingDetails) {
                 console.log(JSON.parse(bookingDetails.body));
                 showGreeting(JSON.parse(bookingDetails.body).cabDetails.cabNumber);
         });
