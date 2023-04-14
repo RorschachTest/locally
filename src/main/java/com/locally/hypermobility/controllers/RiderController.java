@@ -5,30 +5,36 @@ import com.locally.hypermobility.models.BookingRequest;
 import com.locally.hypermobility.models.CabDetails;
 import com.locally.hypermobility.services.CabFinderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@MessageMapping("api/v1/rider")
+//@MessageMapping("api/v1/rider")
 @RequiredArgsConstructor
 public class RiderController {
 
     private final CabFinderService cabFinderService;
 
-    @MessageMapping("/book-cab")
-    @SendTo("/topic/book-cab")
-    public BookingDetails bookACab(BookingRequest bookingRequest) {
+    private final SimpMessagingTemplate simpMessagingTemplate;
+
+    @MessageMapping("/message")
+    public void bookACab(
+            @Header("simpSessionId") String sessionId,
+            @Payload BookingRequest bookingRequest) {
         cabFinderService.bookCabForRider(bookingRequest.getRiderId(), bookingRequest.getPickupLocation(),
                 bookingRequest.getDropLocation());
 
-        return BookingDetails.builder()
-                .cabDetails(
+        BookingDetails bookingDetails = BookingDetails.builder().cabDetails(
                         CabDetails.builder()
                                 .cabNumber("JH-DS-0082-211")
-                        .build()
+                                .build()
                 )
                 .build();
+
+        simpMessagingTemplate.convertAndSend("/queue/greeting-" + sessionId, bookingDetails);
     }
 
 }

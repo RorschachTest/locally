@@ -11,8 +11,6 @@ import java.time.LocalDateTime;
 @Builder
 @ToString
 public class BookingDetails {
-
-    private String test;
     private CabDetails cabDetails;
     private RideDetails rideDetails;
     private LocalDateTime estimatePickupTime;
