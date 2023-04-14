@@ -9,8 +9,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class BookingDetails {
 
+    private String test;
     private CabDetails cabDetails;
     private RideDetails rideDetails;
     private LocalDateTime estimatePickupTime;

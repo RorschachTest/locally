@@ -2,6 +2,7 @@ package com.locally.hypermobility.controllers;
 
 import com.locally.hypermobility.models.BookingDetails;
 import com.locally.hypermobility.models.BookingRequest;
+import com.locally.hypermobility.models.CabDetails;
 import com.locally.hypermobility.services.CabFinderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -18,8 +19,16 @@ public class RiderController {
     @MessageMapping("/book-cab")
     @SendTo("/topic/book-cab")
     public BookingDetails bookACab(BookingRequest bookingRequest) {
-        return cabFinderService.bookCabForRider(bookingRequest.getRiderId(), bookingRequest.getPickupLocation(),
+        cabFinderService.bookCabForRider(bookingRequest.getRiderId(), bookingRequest.getPickupLocation(),
                 bookingRequest.getDropLocation());
+
+        return BookingDetails.builder()
+                .cabDetails(
+                        CabDetails.builder()
+                                .cabNumber("JH-DS-0082-211")
+                        .build()
+                )
+                .build();
     }
 
 }

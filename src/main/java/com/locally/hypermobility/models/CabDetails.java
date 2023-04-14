@@ -10,7 +10,7 @@ import org.springframework.data.redis.domain.geo.GeoLocation;
 @Builder
 public class CabDetails {
     private String cabId;
-    private String canNumber;
+    private String cabNumber;
     private String contactDetails;
     private GeoLocation currentLocation;
 

@@ -18,8 +18,9 @@ function connect() {
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/book-cab', function (greeting) {
-            showGreeting(JSON.parse(greeting.body).content);
+        stompClient.subscribe('/topic/book-cab', function (bookingDetails) {
+                console.log(JSON.parse(bookingDetails.body));
+                showGreeting(JSON.parse(bookingDetails.body).cabDetails.cabNumber);
         });
     });
 }
