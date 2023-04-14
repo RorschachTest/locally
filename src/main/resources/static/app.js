@@ -13,7 +13,7 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('/gs-guide-websocket');
+    var socket = new SockJS('/rider');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
@@ -33,7 +33,12 @@ function disconnect() {
 }
 
 function sendName() {
-    stompClient.send("/api/v1/customer/book-cab", {}, JSON.stringify({'name': $("#name").val()}));
+    stompClient.send("/app/api/v1/rider/book-cab", {},
+    JSON.stringify({
+        'riderId': $("#name").val(),
+        'pickupLocation' : {'x': $("#src_latitude").val(), 'y': $("#src_longitude").val()},
+        'dropLocation' : {'x': $("#des_latitude").val(), 'y': $("#des_longitude").val()},
+    }));
 }
 
 function showGreeting(message) {

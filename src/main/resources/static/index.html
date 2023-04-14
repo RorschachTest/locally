@@ -28,8 +28,17 @@
         <div class="col-md-6">
             <form class="form-inline">
                 <div class="form-group">
-                    <label for="name">What is your name?</label>
+                    <label for="name">Your riderId?</label>
                     <input type="text" id="name" class="form-control" placeholder="Your name here...">
+                    <br>
+                    <label for="src_latitude">What is your location?</label>
+                    <input type="number" step="any" id="src_latitude" class="form-control" placeholder="Your lat...">
+                    <input type="number" step="any" id="src_longitude" class="form-control" placeholder="Your lng...">
+
+                    <label for="des_latitude">What is your destination?</label>
+                    <input type="number" step="any" id="des_latitude" class="form-control" placeholder="destination lat...">
+                    <input type="number" step="any" id="des_longitude" class="form-control" placeholder="destination lng...">
+
                 </div>
                 <button id="send" class="btn btn-default" type="submit">Send</button>
             </form>

@@ -1,16 +1,15 @@
 package com.locally.hypermobility.controllers;
 
 import com.locally.hypermobility.models.BookingDetails;
+import com.locally.hypermobility.models.BookingRequest;
 import com.locally.hypermobility.services.CabFinderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.domain.geo.GeoLocation;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/api/v1/customer")
+@MessageMapping("api/v1/rider")
 @RequiredArgsConstructor
 public class RiderController {
 
@@ -18,10 +17,9 @@ public class RiderController {
 
     @MessageMapping("/book-cab")
     @SendTo("/topic/book-cab")
-    public BookingDetails bookACab(String riderId, GeoLocation pickupLocation, GeoLocation dropLocation) {
-
-        return cabFinderService.bookCabForRider(riderId, pickupLocation, dropLocation);
+    public BookingDetails bookACab(BookingRequest bookingRequest) {
+        return cabFinderService.bookCabForRider(bookingRequest.getRiderId(), bookingRequest.getPickupLocation(),
+                bookingRequest.getDropLocation());
     }
-
 
 }

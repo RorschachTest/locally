@@ -8,7 +8,6 @@ import com.uber.h3core.H3Core;
 import com.uber.h3core.util.LatLng;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.geo.Point;
-import org.springframework.data.redis.domain.geo.GeoLocation;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
@@ -21,7 +20,7 @@ import java.util.List;
 public class MapsServiceImpl implements MapsService {
 
     private static final Integer UBER_H3_RESOLUTION = 9;
-    private static H3Core h3Core;
+    private static final H3Core h3Core;
 
     private final H3CabLocationRepository repository;
 
@@ -34,8 +33,7 @@ public class MapsServiceImpl implements MapsService {
     }
 
     @Override
-    public Flux<CabLocation> fetchNearbyCabs(GeoLocation pickupLocation) {
-        Point pickupPoint = pickupLocation.getPoint();
+    public Flux<CabLocation> fetchNearbyCabs(Point pickupPoint) {
         String h3Index = h3Core.latLngToCellAddress(pickupPoint.getX(), pickupPoint.getY(), UBER_H3_RESOLUTION);
 
         return repository.findAllByH3Index(h3Index).map(cabHexAddress ->
@@ -45,15 +43,15 @@ public class MapsServiceImpl implements MapsService {
     }
 
     @Override
-    public void updateCabCurrentLocation(String cabId, GeoLocation currentLocation) {
+    public void updateCabCurrentLocation(String cabId, Point currentLocation) {
         String h3Index = h3Core.latLngToCellAddress(
-                currentLocation.getPoint().getX(), currentLocation.getPoint().getY(), UBER_H3_RESOLUTION);
+                currentLocation.getX(), currentLocation.getY(), UBER_H3_RESOLUTION);
         repository.save(
                 CabHexAddress.builder()
                         .cabId(cabId)
                         .h3Index(h3Index)
-                        .latitude(BigDecimal.valueOf(currentLocation.getPoint().getX()))
-                        .longitude(BigDecimal.valueOf(currentLocation.getPoint().getY()))
+                        .latitude(BigDecimal.valueOf(currentLocation.getX()))
+                        .longitude(BigDecimal.valueOf(currentLocation.getY()))
                         .build()
         );
     }
