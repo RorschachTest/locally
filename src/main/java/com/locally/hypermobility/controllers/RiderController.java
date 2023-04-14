@@ -20,8 +20,8 @@ public class RiderController {
 
     private final SimpMessagingTemplate simpMessagingTemplate;
 
-    @MessageMapping("/message")
-    @SendToUser("queue/greeting")
+    @MessageMapping("/book-cab")
+    @SendToUser("queue/cab-booking")
     public BookingDetails bookACab(@Payload BookingRequest bookingRequest) {
         cabFinderService.bookCabForRider(bookingRequest.getRiderId(), bookingRequest.getPickupLocation(),
                 bookingRequest.getDropLocation());

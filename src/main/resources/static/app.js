@@ -13,13 +13,13 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('/greeting');
+    var socket = new SockJS('/rider');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
         var sessionId = /\/([^\/]+)\/websocket/.exec(socket._transport.url)[1];
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/user/queue/greeting', function (bookingDetails) {
+        stompClient.subscribe('/user/queue/cab-booking', function (bookingDetails) {
                 console.log(JSON.parse(bookingDetails.body));
                 showGreeting(JSON.parse(bookingDetails.body).cabDetails.cabNumber);
         });
@@ -35,7 +35,7 @@ function disconnect() {
 }
 
 function sendName() {
-    stompClient.send("/app/message", {},
+    stompClient.send("/app/book-cab", {},
     JSON.stringify({
         'riderId': $("#name").val(),
         'pickupLocation' : {'x': $("#src_latitude").val(), 'y': $("#src_longitude").val()},
