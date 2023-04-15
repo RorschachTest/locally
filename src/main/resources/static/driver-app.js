@@ -15,7 +15,7 @@ function setConnected(connected) {
 function connect() {
     var socket = new SockJS('/rider');
     stompClient = Stomp.over(socket);
-    stompClient.connect({'X-Authorization': 'token'}, function (frame) {
+    stompClient.connect({}, function (frame) {
         setConnected(true);
         var sessionId = /\/([^\/]+)\/websocket/.exec(socket._transport.url)[1];
         console.log('Connected: ' + frame);

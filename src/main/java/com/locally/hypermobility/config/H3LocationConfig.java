@@ -11,7 +11,7 @@ import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator;
 
 @Configuration
 @EnableR2dbcAuditing
-public class H3LocationConfig{
+public class H3LocationConfig {
 
     @Value("classpath:/schema.sql")
     Resource resource;
