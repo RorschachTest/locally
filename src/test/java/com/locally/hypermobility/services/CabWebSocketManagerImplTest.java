@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Optional;
 
 //@DataJpaTest
-//@Import(SocketManagerRedisCacheConfig.class)
+//@Import(SocketManagerRedisCacheConfig.class) TODO: run this test with test-data-splice
 @SpringBootTest
 class CabWebSocketManagerImplTest {
 
