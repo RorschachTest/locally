@@ -14,4 +14,5 @@ public class CabDataUtil {
 
     public static final Point rider = new Point(new Point(17.461395, 78.356649));
 
+
 }

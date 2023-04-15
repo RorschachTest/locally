@@ -3,7 +3,7 @@ package com.locally.hypermobility.controllers;
 import com.locally.hypermobility.models.BookingDetails;
 import com.locally.hypermobility.models.BookingRequest;
 import com.locally.hypermobility.models.CabDetails;
-import com.locally.hypermobility.services.CabFinderService;
+import com.locally.hypermobility.services.interfaces.CabFinderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;

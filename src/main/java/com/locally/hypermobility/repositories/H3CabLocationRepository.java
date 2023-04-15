@@ -1,6 +1,6 @@
 package com.locally.hypermobility.repositories;
 
-import com.locally.hypermobility.models.CabHexAddress;
+import com.locally.hypermobility.domain.CabHexAddress;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;

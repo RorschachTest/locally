@@ -1,4 +1,4 @@
-package com.locally.hypermobility.services;
+package com.locally.hypermobility.services.interfaces;
 
 import com.locally.hypermobility.models.BookingDetails;
 import org.springframework.data.geo.Point;

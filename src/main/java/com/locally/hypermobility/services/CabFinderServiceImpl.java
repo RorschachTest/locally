@@ -3,9 +3,11 @@ package com.locally.hypermobility.services;
 import com.locally.hypermobility.models.BookingDetails;
 import com.locally.hypermobility.models.CabDetails;
 import com.locally.hypermobility.models.CabLocation;
+import com.locally.hypermobility.services.interfaces.CabFinderService;
+import com.locally.hypermobility.services.interfaces.LocationService;
+import com.locally.hypermobility.services.interfaces.TripsManagerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.geo.Point;
-import org.springframework.data.redis.domain.geo.GeoLocation;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 

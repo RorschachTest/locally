@@ -1,4 +1,4 @@
-package com.locally.hypermobility.models;
+package com.locally.hypermobility.domain;
 
 import lombok.*;
 import nonapi.io.github.classgraph.json.Id;

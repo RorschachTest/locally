@@ -1,6 +1,6 @@
 package com.locally.hypermobility.bootstrap;
 
-import com.locally.hypermobility.models.CabHexAddress;
+import com.locally.hypermobility.domain.CabHexAddress;
 import com.locally.hypermobility.repositories.H3CabLocationRepository;
 import com.uber.h3core.H3Core;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.locally.hypermobility.services;
 
-import com.locally.hypermobility.models.CabHexAddress;
+import com.locally.hypermobility.domain.CabHexAddress;
 import com.locally.hypermobility.repositories.H3CabLocationRepository;
 import com.locally.hypermobility.util.CabDataUtil;
 import com.uber.h3core.H3Core;

@@ -1,9 +1,10 @@
 package com.locally.hypermobility.services;
 
 import com.locally.hypermobility.models.CabDetails;
-import com.locally.hypermobility.models.CabHexAddress;
+import com.locally.hypermobility.domain.CabHexAddress;
 import com.locally.hypermobility.models.CabLocation;
 import com.locally.hypermobility.repositories.H3CabLocationRepository;
+import com.locally.hypermobility.services.interfaces.MapsService;
 import com.uber.h3core.H3Core;
 import com.uber.h3core.util.LatLng;
 import lombok.RequiredArgsConstructor;

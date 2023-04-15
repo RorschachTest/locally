@@ -1,4 +1,4 @@
-package com.locally.hypermobility.services;
+package com.locally.hypermobility.services.interfaces;
 
 import com.locally.hypermobility.models.CabDetails;
 import com.locally.hypermobility.models.CabLocation;
