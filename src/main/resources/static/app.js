@@ -17,14 +17,14 @@ function connect() {
     stompClient = Stomp.over(socket);
     stompClient.connect({token: 'token'}, function (frame) {
         setConnected(true);
-        var headerName = "${_csrf.headerName}";
-        var token = "${_csrf.token}";
-        var headers = {};
-        headers[headerName] = token;
+//        var headerName = "${_csrf.headerName}";
+//        var token = "${_csrf.token}";
+//        var headers = {};
+//        headers[headerName] = token;
         var sessionId = /\/([^\/]+)\/websocket/.exec(socket._transport.url)[1];
 
         console.log('Connected: ' + frame);
-        stompClient.subscribe(headers, '/user/queue/cab-booking', function (bookingDetails) {
+        stompClient.subscribe('/user/queue/cab-booking', function (bookingDetails) {
                 console.log(JSON.parse(bookingDetails.body));
                 showGreeting(JSON.parse(bookingDetails.body).cabDetails.cabNumber);
         });
