@@ -15,14 +15,9 @@ function setConnected(connected) {
 function connect() {
     var socket = new SockJS('/rider');
     stompClient = Stomp.over(socket);
-    stompClient.connect({token: 'token'}, function (frame) {
+    stompClient.connect({}, function (frame) {
         setConnected(true);
-//        var headerName = "${_csrf.headerName}";
-//        var token = "${_csrf.token}";
-//        var headers = {};
-//        headers[headerName] = token;
         var sessionId = /\/([^\/]+)\/websocket/.exec(socket._transport.url)[1];
-
         console.log('Connected: ' + frame);
         stompClient.subscribe('/user/queue/cab-booking', function (bookingDetails) {
                 console.log(JSON.parse(bookingDetails.body));

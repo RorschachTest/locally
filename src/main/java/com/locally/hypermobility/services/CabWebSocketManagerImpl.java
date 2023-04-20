@@ -19,7 +19,7 @@ public class CabWebSocketManagerImpl implements CabWebSocketManager {
     }
 
     @Override
-    public void storeSessionInfo(String sessionId, String cabId) {
+    public void storeSessionInfo(String cabId, String sessionId) {
         cabSessionRepository.save(
                 CabWebSocketSessionCache.builder()
                         .cabId(cabId)
