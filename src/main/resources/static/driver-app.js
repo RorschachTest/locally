@@ -19,9 +19,9 @@ function connect() {
         setConnected(true);
         var sessionId = /\/([^\/]+)\/websocket/.exec(socket._transport.url)[1];
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/user/queue/cab-booking', function (bookingDetails) {
-                console.log(JSON.parse(bookingDetails.body));
-                showGreeting(JSON.parse(bookingDetails.body).cabDetails.cabNumber);
+        stompClient.subscribe('/user/queue/cab-booking-request', function (bookingRequest) {
+                console.log("happy holidays: "+JSON.parse(bookingRequest.body));
+                showGreeting(JSON.parse(bookingRequest.body).tripCharges);
         });
     });
 }
@@ -44,7 +44,7 @@ function sendName() {
 }
 
 function showGreeting(message) {
-    $("#greetings").append("<tr><td>" + message + "</td></tr>");
+    $("#greetings").append("<tr><td>paisa hi paisa hoga: " + message + "</td></tr>");
 }
 
 $(function () {

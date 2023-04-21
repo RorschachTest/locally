@@ -60,7 +60,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void configureClientInboundChannel(ChannelRegistration registration) {
         AuthorizationManager<Message<?>> myAuthorizationRules = AuthenticatedAuthorizationManager.authenticated();
         AuthorizationChannelInterceptor authz = new AuthorizationChannelInterceptor(myAuthorizationRules);
-        AuthorizationEventPublisher publisher = new SpringAuthorizationEventPublisher(this.context);
+        AuthorizationEventPublisher publisher = new SpringAuthorizationEventPublisher(context);
         authz.setAuthorizationEventPublisher(publisher);
         registration.interceptors(new SecurityContextChannelInterceptor(), authz);
     }
