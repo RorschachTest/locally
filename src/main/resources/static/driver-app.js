@@ -21,7 +21,7 @@ function connect() {
         console.log('Connected: ' + frame);
         stompClient.subscribe('/user/queue/cab-booking-request', function (bookingRequest) {
                 console.log("happy holidays: "+JSON.parse(bookingRequest.body));
-                showGreeting(JSON.parse(bookingRequest.body).tripCharges);
+                showGreeting(JSON.parse(bookingRequest.body));
         });
     });
 }
@@ -43,8 +43,9 @@ function sendName() {
     }));
 }
 
-function showGreeting(message) {
-    $("#greetings").append("<tr><td>paisa hi paisa hoga: " + message + "</td></tr>");
+function showGreeting(bookingRequest) {
+    console.log(bookingRequest.bookingId);
+    $("#greetings").append("<tr><td><form class=\"form-inline\"><button id=\"send\" class=\"btn btn-default\" type=\"submit\">Accept Booking</button></form></td></tr>");
 }
 
 $(function () {

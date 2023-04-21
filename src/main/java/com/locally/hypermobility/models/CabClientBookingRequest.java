@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 @Builder
 public class CabClientBookingRequest {
 
+    private String bookingId;
     private Point pickupLocation;
     private Point dropLocation;
     private BigDecimal tripCharges;
