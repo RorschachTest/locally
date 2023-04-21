@@ -16,16 +16,17 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CabController {
 
+    static Integer bookingId = 123;
     @Autowired
     CabSessionRepository cabSessionRepository;
     private final SimpMessagingTemplate messagingTemplate;
 
     public void bookingRequestToCab(CabClientBookingRequest cabBookingRequest, String sessionId){
-
+        bookingId++;
         Optional<CabWebSocketSessionCache> cabSession = cabSessionRepository.findById("user");
         messagingTemplate.convertAndSend("/queue/cab-booking-request-user" + cabSession.get().getSessionId(),
                 CabClientBookingRequest.builder()
-                    .bookingId("123")
+                    .bookingId(String.valueOf(bookingId))
                     .pickupLocation(new Point(3, 1))
                     .dropLocation(new Point(3, 2))
                     .tripCharges(BigDecimal.ONE)

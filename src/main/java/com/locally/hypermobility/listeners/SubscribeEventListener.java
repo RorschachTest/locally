@@ -24,5 +24,6 @@ public class SubscribeEventListener implements ApplicationListener<SessionSubscr
         System.out.println(user + ":" + sessionId);
         cabWebSocketManager.storeSessionInfo(user, sessionId);
         cabController.bookingRequestToCab(null, null);
+        cabController.bookingRequestToCab(null, null);
     }
 }

@@ -35,17 +35,17 @@ function disconnect() {
 }
 
 function sendName() {
-    stompClient.send("/app/book-cab", {},
-    JSON.stringify({
-        'riderId': $("#name").val(),
-        'pickupLocation' : {'x': $("#src_latitude").val(), 'y': $("#src_longitude").val()},
-        'dropLocation' : {'x': $("#des_latitude").val(), 'y': $("#des_longitude").val()},
-    }));
+    stompClient.send("/app/book-cab", {},"");
 }
 
 function showGreeting(bookingRequest) {
     console.log(bookingRequest.bookingId);
-    $("#greetings").append("<tr><td><form class=\"form-inline\"><button id=\"send\" class=\"btn btn-default\" type=\"submit\">Accept Booking</button></form></td></tr>");
+
+    $("#greetings").append(
+    '<tr><td> book cab for booking id: '+ bookingRequest.bookingId + '</td>' +
+    '<td><button id="acceptBooking" class="btn btn-default" type="button" value="' +
+    bookingRequest.bookingId +
+    '">Accept Booking</button></td></tr>');
 }
 
 $(function () {
@@ -54,5 +54,8 @@ $(function () {
     });
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendName(); });
+    $( "#greetings" ).on('click', 'button', function(){
+        alert(this.value)
+        sendName();
+    });
 });
